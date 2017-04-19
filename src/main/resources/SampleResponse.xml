@@ -1,0 +1,13 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns2:getEmployeeResponse xmlns:ns2="http://com.example/webservice/generatedwsdl">
+            <ns2:employee>
+                <ns2:name>arun</ns2:name>
+                <ns2:id>535141</ns2:id>
+                <ns2:designation>ITA</ns2:designation>
+                <ns2:role>developer</ns2:role>
+            </ns2:employee>
+        </ns2:getEmployeeResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

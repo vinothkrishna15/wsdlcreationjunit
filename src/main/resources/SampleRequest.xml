@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:gs="http://com.example/webservice/generatedwsdl">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <gs:getEmployeeRequest>
+         <gs:name>arun</gs:name>
+      </gs:getEmployeeRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
