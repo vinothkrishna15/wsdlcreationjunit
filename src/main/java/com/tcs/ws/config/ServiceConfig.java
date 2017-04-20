@@ -9,12 +9,11 @@ public class ServiceConfig {
 	@Bean
 	public Jaxb2Marshaller marshaller() {
 		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setContextPath("hello.wsdl");
+		marshaller.setContextPath("com.tcs.ws.wsdl");
 		return marshaller;
 	}
 	@Bean
 	public WebserviceTemplateExtended serviceClient(Jaxb2Marshaller marshaller) {
-		System.out.println("sdfsdfsgfgsdg#################");
 		WebserviceTemplateExtended client = new WebserviceTemplateExtended();
 		client.setDefaultUri("http://10.144.135.147:8090/ws/employees.wsdl");
 		client.setMarshaller(marshaller);

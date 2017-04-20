@@ -3,7 +3,7 @@
  */
 package com.tcs.ws;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +12,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.tcs.ws.config.WebserviceTemplateExtended;
 import com.tcs.ws.service.ServiceClient;
+import com.tcs.ws.wsdl.Employee;
+import com.tcs.ws.wsdl.GetEmployeeRequest;
+import com.tcs.ws.wsdl.GetEmployeeResponse;
 
-import hello.wsdl.Employee;
-import hello.wsdl.GetEmployeeRequest;
-import hello.wsdl.GetEmployeeResponse;
 
 /**
  * @author TCS

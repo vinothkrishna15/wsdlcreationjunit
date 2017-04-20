@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tcs.ws.config.WebserviceTemplateExtended;
+import com.tcs.ws.wsdl.GetEmployeeRequest;
+import com.tcs.ws.wsdl.GetEmployeeResponse;
 
-import hello.wsdl.GetEmployeeRequest;
-import hello.wsdl.GetEmployeeResponse;
+
 
 
 /**

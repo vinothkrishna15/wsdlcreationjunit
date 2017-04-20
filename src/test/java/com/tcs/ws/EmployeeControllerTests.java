@@ -4,9 +4,7 @@
 package com.tcs.ws;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,17 +18,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ws.client.core.WebServiceTemplate;
-import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-import org.springframework.ws.soap.client.core.SoapActionCallback;
 
-import com.tcs.ws.config.WebserviceTemplateExtended;
 import com.tcs.ws.controller.EmployeeController;
 import com.tcs.ws.service.ServiceClient;
+import com.tcs.ws.wsdl.Employee;
+import com.tcs.ws.wsdl.GetEmployeeRequest;
+import com.tcs.ws.wsdl.GetEmployeeResponse;
 
-import hello.wsdl.Employee;
-import hello.wsdl.GetEmployeeRequest;
-import hello.wsdl.GetEmployeeResponse;
+
 
 /**
  * @author TCS

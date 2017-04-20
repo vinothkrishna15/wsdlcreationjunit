@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcs.ws.service.ServiceClient;
-
-import hello.wsdl.Employee;
-import hello.wsdl.GetEmployeeResponse;
+import com.tcs.ws.wsdl.Employee;
+import com.tcs.ws.wsdl.GetEmployeeResponse;
 
 /**
  * @author TCS
