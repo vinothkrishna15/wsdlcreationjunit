@@ -78,10 +78,11 @@
 		    <configuration>
 		        <schemaLanguage>WSDL</schemaLanguage>
 		        <generatePackage>com.tcs.ws.wsdl</generatePackage>
-		        <forceRegenerate>true</forceRegenerate>
+		        <!-- Change to true if the classes are not regenerated from WSDL -->
+		        <forceRegenerate>false</forceRegenerate>
 		        <schemas>
 		            <schema>
-		                 <url>/Users/TCS/Desktop/vk/wsdlImport/src/main/resources/employees.wsdl</url> 
+		                 <url>src/main/resources/employees.wsdl</url> 
 		                <!-- <url>http://10.144.135.147:8090/ws/employees.wsdl</url> -->
 		            </schema>
 		        </schemas>
