@@ -81,8 +81,8 @@
 		        <forceRegenerate>true</forceRegenerate>
 		        <schemas>
 		            <schema>
-		                <!-- <url>/Users/TCS/Desktop/vk/wsdlImport/src/main/resources/employees.wsdl</url> -->
-		                <url>http://10.144.135.147:8090/ws/employees.wsdl</url>
+		                 <url>/Users/TCS/Desktop/vk/wsdlImport/src/main/resources/employees.wsdl</url> 
+		                <!-- <url>http://10.144.135.147:8090/ws/employees.wsdl</url> -->
 		            </schema>
 		        </schemas>
 		    </configuration>
