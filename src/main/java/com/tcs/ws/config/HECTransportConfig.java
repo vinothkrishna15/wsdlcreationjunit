@@ -1,4 +1,4 @@
-package com.tcs.ws;
+package com.tcs.ws.config;
 
 /**
  * 

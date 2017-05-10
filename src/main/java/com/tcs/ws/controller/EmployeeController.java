@@ -31,7 +31,7 @@ public class EmployeeController {
 		// get your logger
 		Logger logger = LoggerFactory.getLogger("splunk.logger");
 		// log a regular string
-		logger.info("Inside empDetails Method of EmployeeController");
+		logger.info("Entering empDetails Method of EmployeeController");
 
 		GetEmployeeResponse response = serviceClient.getEmployeeDetails(name);
 		Employee emp = new Employee();
@@ -41,7 +41,7 @@ public class EmployeeController {
 			emp.setDesignation(response.getEmployee().getDesignation());
 			emp.setRole(response.getEmployee().getRole());
 		}
-		logger.info("Exiting empDetails Method");
+		logger.info("Exiting empDetails Method of EmployeeController");
 		return emp;
 	}
 }

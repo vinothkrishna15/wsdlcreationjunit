@@ -4,8 +4,8 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Layout;
 import org.apache.log4j.spi.LoggingEvent;
 
-import com.tcs.ws.HECTransportConfig;
 import com.tcs.ws.SplunkHECInput;
+import com.tcs.ws.config.HECTransportConfig;
 
 /**
  * 

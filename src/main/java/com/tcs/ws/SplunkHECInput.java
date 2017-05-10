@@ -31,6 +31,8 @@ import org.apache.http.nio.reactor.ConnectingIOReactor;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.ssl.TrustStrategy;
 
+import com.tcs.ws.config.HECTransportConfig;
+
 
 
 /**
