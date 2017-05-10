@@ -49,8 +49,6 @@
 			<PatternLayout pattern="%m%n" />
 		</Console>
 
-		
-
 	</Appenders>
 
 	<Loggers>
