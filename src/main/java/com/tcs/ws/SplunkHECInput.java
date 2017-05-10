@@ -36,7 +36,7 @@ import org.apache.http.ssl.TrustStrategy;
 /**
  * Common HEC logic shared by all appenders/handlers
  * 
- * @author Damien Dallimore damien@dtdsoftware.com
+ * @author VinothKrishna
  * 
  */
 

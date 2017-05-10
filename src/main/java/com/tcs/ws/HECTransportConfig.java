@@ -1,5 +1,10 @@
 package com.tcs.ws;
 
+/**
+ * 
+ * @author VinothKrishna
+ *
+ */
 public class HECTransportConfig {
 
 	private String token;

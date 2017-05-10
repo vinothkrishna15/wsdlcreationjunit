@@ -4,7 +4,7 @@ package com.tcs.ws;
  * A helper class to encapsulate URL parameters for submitting events to Splunk
  * via REST endpoints
  * 
- * @author Damien Dallimore damien@dtdsoftware.com
+ * @author VinothKrishna
  * 
  */
 public class RestEventData {

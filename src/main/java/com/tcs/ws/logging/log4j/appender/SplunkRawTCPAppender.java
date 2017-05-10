@@ -6,14 +6,10 @@ import org.apache.log4j.spi.LoggingEvent;
 
 import com.tcs.ws.SplunkRawTCPInput;
 
-
-
-
-
 /**
  * Log4j Appender for sending events to Splunk via Raw TCP
  * 
- * @author Damien Dallimore damien@dtdsoftware.com
+ * @author VinothKrishna
  * 
  */
 public class SplunkRawTCPAppender extends AppenderSkeleton {

@@ -7,11 +7,11 @@ import org.apache.log4j.spi.LoggingEvent;
 import com.tcs.ws.HECTransportConfig;
 import com.tcs.ws.SplunkHECInput;
 
-
-
-
-
-
+/**
+ * 
+ * @author VinothKrishna
+ *
+ */
 public class SplunkHECAppender extends AppenderSkeleton {
 
 	// connection settings

@@ -34,7 +34,7 @@ import org.apache.commons.lang.time.FastDateFormat;
  *      Logging Best Practices</a>
  * 
  * 
- * @author Damien Dallimore damien@dtdsoftware.com
+ * @author VinothKrishna
  * 
  */
 public class SplunkLogEvent {

@@ -7,7 +7,7 @@ import java.util.List;
  * Common base class for all Splunk Input types. Currently just has shared logic
  * for queuing up events.
  * 
- * @author Damien Dallimore damien@dtdsoftware.com
+ * @author VinothKrishna
  * 
  */
 public abstract class SplunkInput {

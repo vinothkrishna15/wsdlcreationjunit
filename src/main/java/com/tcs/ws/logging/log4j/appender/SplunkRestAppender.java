@@ -7,10 +7,11 @@ import org.apache.log4j.spi.LoggingEvent;
 import com.tcs.ws.RestEventData;
 import com.tcs.ws.SplunkRestInput;
 
-
-
-
-
+/**
+ * 
+ * @author VinothKrishna
+ *
+ */
 public class SplunkRestAppender extends AppenderSkeleton {
 
 	public static final String STREAM = "stream";
