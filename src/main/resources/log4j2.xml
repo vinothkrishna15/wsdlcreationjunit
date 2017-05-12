@@ -16,12 +16,7 @@
 	                       index="main" 
 	                       source="log4j2" 
 	                       sourcetype="test-data" 
-	                       maxQueueSize="5MB"
-	                       dropEventsOnQueueFull="false"
-	                       batchMode="true"
-	                       maxBatchSizeBytes="1MB"
-	                       maxBatchSizeEvents="5"
-	                       maxInactiveTimeBeforeBatchFlush="500">
+	                       maxQueueSize="5MB">
 	                       
 	        <PatternLayout pattern="%m" /> 
 	         
@@ -29,7 +24,7 @@
 
          
 		<Console name="stdout" target="SYSTEM_OUT">
-			<PatternLayout pattern="%m%n" />
+			<PatternLayout pattern="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
 		</Console>
 
 	</Appenders>

@@ -25,13 +25,13 @@ public class EmployeeController {
 
 	@Autowired
 	ServiceClient serviceClient;
-
+	// get your logger
+			Logger logger = LoggerFactory.getLogger("splunk.logger");
 	@RequestMapping("/getEmployee")
 	public Employee empDetails(@RequestParam(value = "name", defaultValue = "") String name) {
-		// get your logger
-		Logger logger = LoggerFactory.getLogger("splunk.logger");
+		
 		// log a regular string
-		logger.info("Entering empDetails Method of EmployeeController");
+		logger.info("Entering empDetails Method of EmployeeController for " + name);
 
 		GetEmployeeResponse response = serviceClient.getEmployeeDetails(name);
 		Employee emp = new Employee();
