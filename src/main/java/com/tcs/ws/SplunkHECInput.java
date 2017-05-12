@@ -33,8 +33,6 @@ import org.apache.http.ssl.TrustStrategy;
 
 import com.tcs.ws.config.HECTransportConfig;
 
-
-
 /**
  * Common HEC logic shared by all appenders/handlers
  * 
@@ -47,9 +45,6 @@ public class SplunkHECInput extends SplunkInput {
 	// connection props
 	private HECTransportConfig config;
 
-	// batch buffer
-	private List<String> batchBuffer;
-	private long currentBatchSizeBytes = 0;
 	private long lastEventReceivedTime;
 
 	private CloseableHttpAsyncClient httpClient;
@@ -65,21 +60,14 @@ public class SplunkHECInput extends SplunkInput {
 
 		this.config = config;
 
-		this.batchBuffer = Collections
-				.synchronizedList(new LinkedList<String>());
 		this.lastEventReceivedTime = System.currentTimeMillis();
 
-		Registry<SchemeIOSessionStrategy> sslSessionStrategy = RegistryBuilder
-				.<SchemeIOSessionStrategy> create()
+		Registry<SchemeIOSessionStrategy> sslSessionStrategy = RegistryBuilder.<SchemeIOSessionStrategy>create()
 				.register("http", NoopIOSessionStrategy.INSTANCE)
-				.register(
-						"https",
-						new SSLIOSessionStrategy(getSSLContext(),
-								HOSTNAME_VERIFIER)).build();
+				.register("https", new SSLIOSessionStrategy(getSSLContext(), HOSTNAME_VERIFIER)).build();
 
 		ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor();
-		PoolingNHttpClientConnectionManager cm = new PoolingNHttpClientConnectionManager(
-				ioReactor, sslSessionStrategy);
+		PoolingNHttpClientConnectionManager cm = new PoolingNHttpClientConnectionManager(ioReactor, sslSessionStrategy);
 		cm.setMaxTotal(config.getPoolsize());
 
 		HttpHost splunk = new HttpHost(config.getHost(), config.getPort());
@@ -87,69 +75,22 @@ public class SplunkHECInput extends SplunkInput {
 
 		httpClient = HttpAsyncClients.custom().setConnectionManager(cm).build();
 
-		uri = new URIBuilder().setScheme(config.isHttps() ? "https" : "http")
-				.setHost(config.getHost()).setPort(config.getPort())
-				.setPath("/services/collector").build();
+		uri = new URIBuilder().setScheme(config.isHttps() ? "https" : "http").setHost(config.getHost())
+				.setPort(config.getPort()).setPath("/services/collector").build();
 
 		openStream();
 
-		if (config.isBatchMode()) {
-			new BatchBufferActivityCheckerThread().start();
-		}
-	}
-
-	class BatchBufferActivityCheckerThread extends Thread {
-
-		BatchBufferActivityCheckerThread() {
-
-		}
-
-		public void run() {
-
-			while (true) {
-				String currentMessage = "";
-				try {
-					long currentTime = System.currentTimeMillis();
-					if ((currentTime - lastEventReceivedTime) >= config
-							.getMaxInactiveTimeBeforeBatchFlush()) {
-						if (batchBuffer.size() > 0) {
-							currentMessage = rollOutBatchBuffer();
-							batchBuffer.clear();
-							currentBatchSizeBytes = 0;
-							hecPost(currentMessage);
-						}
-					}
-
-					Thread.sleep(1000);
-				} catch (Exception e) {
-					// something went wrong , put message on the queue for retry
-					enqueue(currentMessage);
-					try {
-						closeStream();
-					} catch (Exception e1) {
-					}
-
-					try {
-						openStream();
-					} catch (Exception e2) {
-					}
-				}
-
-			}
-		}
 	}
 
 	private SSLContext getSSLContext() {
 		TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
-			public boolean isTrusted(X509Certificate[] certificate,
-					String authType) {
+			public boolean isTrusted(X509Certificate[] certificate, String authType) {
 				return true;
 			}
 		};
 		SSLContext sslContext = null;
 		try {
-			sslContext = SSLContexts.custom()
-					.loadTrustMaterial(null, acceptingTrustStrategy).build();
+			sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
 		} catch (Exception e) {
 			// Handle error
 		}
@@ -200,28 +141,13 @@ public class SplunkHECInput extends SplunkInput {
 			// could use a JSON Object , but the JSON is so trivial , just
 			// building it with a StringBuffer
 			StringBuffer json = new StringBuffer();
-			json.append("{\"").append("event\":").append(message).append(",\"")
-					.append("index\":\"").append(config.getIndex())
-					.append("\",\"").append("source\":\"")
-					.append(config.getSource()).append("\",\"")
-					.append("sourcetype\":\"").append(config.getSourcetype())
-					.append("\"").append("}");
+			json.append("{\"").append("event\":").append(message).append(",\"").append("index\":\"")
+					.append(config.getIndex()).append("\",\"").append("source\":\"").append(config.getSource())
+					.append("\",\"").append("sourcetype\":\"").append(config.getSourcetype()).append("\"").append("}");
 
 			currentMessage = json.toString();
 
-			if (config.isBatchMode()) {
-				lastEventReceivedTime = System.currentTimeMillis();
-				currentBatchSizeBytes += currentMessage.length();
-				batchBuffer.add(currentMessage);
-				if (flushBuffer()) {
-					currentMessage = rollOutBatchBuffer();
-					batchBuffer.clear();
-					currentBatchSizeBytes = 0;
-					hecPost(currentMessage);
-				}
-			} else {
-				hecPost(currentMessage);
-			}
+			hecPost(currentMessage);
 
 			// flush the queue
 			while (queueContainsEvents()) {
@@ -245,31 +171,12 @@ public class SplunkHECInput extends SplunkInput {
 		}
 	}
 
-	private boolean flushBuffer() {
-
-		return (currentBatchSizeBytes >= config.getMaxBatchSizeBytes())
-				|| (batchBuffer.size() >= config.getMaxBatchSizeEvents());
-
-	}
-
-	private String rollOutBatchBuffer() {
-
-		StringBuffer sb = new StringBuffer();
-
-		for (String event : batchBuffer) {
-			sb.append(event);
-		}
-
-		return sb.toString();
-	}
-
 	private void hecPost(String currentMessage) throws Exception {
 
 		HttpPost post = new HttpPost(uri);
 		post.addHeader("Authorization", "Splunk " + config.getToken());
 
-		StringEntity requestEntity = new StringEntity(currentMessage,
-				ContentType.create("application/json", "UTF-8"));
+		StringEntity requestEntity = new StringEntity(currentMessage, ContentType.create("application/json", "UTF-8"));
 
 		post.setEntity(requestEntity);
 		Future<HttpResponse> future = httpClient.execute(post, null);

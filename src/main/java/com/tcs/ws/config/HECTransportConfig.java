@@ -13,9 +13,9 @@ public class HECTransportConfig {
 	private boolean https = false;
 	private int poolsize = 1;
 
-	private String index = "main";
-	private String source = "splunk_javalogging_hec";
-	private String sourcetype = "splunk_javalogging_hec";
+	private String index;
+	private String source;
+	private String sourcetype;
 
 	// data size multipliers
 	private static final int KB = 1024;

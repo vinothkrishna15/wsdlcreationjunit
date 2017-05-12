@@ -49,8 +49,6 @@ public class SplunkHECAppender extends AppenderSkeleton {
 		try {
 			if (shi == null) {
 				shi = new SplunkHECInput(config);
-				shi.setMaxQueueSize(maxQueueSize);
-				shi.setDropEventsOnQueueFull(dropEventsOnQueueFull);
 			}
 		} catch (Exception e) {
 			errorHandler
