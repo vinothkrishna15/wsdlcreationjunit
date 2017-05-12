@@ -274,8 +274,6 @@ public class SplunkHECInput extends SplunkInput {
 		post.setEntity(requestEntity);
 		Future<HttpResponse> future = httpClient.execute(post, null);
 		HttpResponse response = future.get();
-		// System.out.println(response.getStatusLine());
-		// System.out.println(EntityUtils.toString(response.getEntity()));
 
 	}
 }
